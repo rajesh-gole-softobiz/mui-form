@@ -1,2 +1,2 @@
-import ShowUsers from "./AddUser";
+import ShowUsers from "./ShowUsers";
 export default ShowUsers;

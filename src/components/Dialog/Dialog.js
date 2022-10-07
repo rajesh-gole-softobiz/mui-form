@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import ResponsiveAppBar from '../../layouts';
 import ShowUsers from '../ShowUsers/ShowUsers';
 import { Link } from 'react-router-dom';
+import AddUser from '../User';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -51,7 +52,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs({children, title}) {
+export default function CustomizedDialogs() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -66,7 +67,7 @@ export default function CustomizedDialogs({children, title}) {
       <Button variant="outlined" onClick={handleClickOpen}>
         Add User
       </Button>
-      <Button variant="outlined">
+      <Button variant="outlined" component={Link}  to={'/all-users'} >
         All Users
       </Button>
       <BootstrapDialog
@@ -75,10 +76,10 @@ export default function CustomizedDialogs({children, title}) {
         open={open}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {title}
+            Add User Form
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          {children}
+          <AddUser/>
         </DialogContent>
       </BootstrapDialog>
     </div>

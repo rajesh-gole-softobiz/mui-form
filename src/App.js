@@ -2,13 +2,15 @@ import "./App.css";
 import CustomizedDialogs from "./components/Dialog";
 import AddUser from "./components/User";
 import ResponsiveAppBar from "./layouts";
+import Index from "./routes";
 
 function App() {
   return (
     <div className="App">
-      <CustomizedDialogs title={'Add User Form'}>
+      <Index/>
+      {/* <CustomizedDialogs title={'Add User Form'}>
         <AddUser />
-      </CustomizedDialogs>
+      </CustomizedDialogs> */}
     </div>
   );
 }

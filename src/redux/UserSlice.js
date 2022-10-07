@@ -3,10 +3,10 @@ const {createSlice} = require("@reduxjs/toolkit")
 const initialUsers = {
     users : [
         {
-            id:'',
-            name:'',
-            email:'',
-            phone:''
+            id:'1',
+            name:'Rajesh Gole',
+            email:'rajesh.gole@softobiz.com',
+            phone:'8967120236'
         }
     ]
 };

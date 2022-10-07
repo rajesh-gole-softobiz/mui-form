@@ -13,27 +13,29 @@ const AddUser = () => {
   const dispatch = useDispatch();
 
   const [initialValues, setIntialvalues] = useState({
+    id:"",
     name: "",
     email: "",
-    phoneNumber: "",
+    phone: "",
   });
   const validationSchema = Yup.object().shape({
     name: Yup.string().min(3, "It's too short").required("Required"),
     email: Yup.string().email("Enter valid email").required("Required"),
-    phoneNumber: Yup.string()
+    phone: Yup.string()
       .matches(phoneRegExp, "Enter valid Phone number")
       .required("Required"),
   });
   const numberofUsers = useSelector((state) => state.usersReducer.users.length);
-  console.log("numberofUsers", numberofUsers - 1);
+  console.log("numberofUsers", numberofUsers);
 
   const onSubmit = (values) => {
     setIntialvalues(values)
+    const id = numberofUsers +1;
     const name = values.name;
     const email = values.email;
     const phone = values.phone;
 
-    const user = { name, email, phone };
+    const user = {id, name, email, phone };
 
     dispatch(addUser(user));
   };
@@ -76,11 +78,11 @@ const AddUser = () => {
 
               <Field
                 as={TextField}
-                name="phoneNumber"
+                name="phone"
                 label="Phone Number"
                 fullWidth
-                error={errors.phoneNumber && touched.phoneNumber}
-                helperText={<ErrorMessage name="phoneNumber" />}
+                error={errors.phone && touched.phone}
+                helperText={<ErrorMessage name="phone" />}
                 required
               />
 

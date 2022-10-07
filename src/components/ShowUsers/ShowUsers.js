@@ -11,6 +11,8 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import moment from 'moment';
 import SearchBar from '@mkyy/mui-search-bar'
+import { Link } from 'react-router-dom';
+
 
 const ShowUsers = () => {
    const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -106,7 +108,7 @@ const ShowUsers = () => {
                   <StyledTableCell align="right">{user.email}</StyledTableCell>
                   {/* <StyledTableCell align="right">{moment(user.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a")}</StyledTableCell>  */}
                   <StyledTableCell align="right">
-                    <Button variant="outlined" href="#">
+                    <Button variant="outlined" component={Link}  to={`/user/${user.id}`}>
                       Info
                     </Button>
                   </StyledTableCell>

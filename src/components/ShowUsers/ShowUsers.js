@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useSelector } from "react-redux";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -9,9 +9,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import moment from 'moment';
+import SearchBar from '@mkyy/mui-search-bar'
 
 const ShowUsers = () => {
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
       color: theme.palette.common.white,
@@ -20,6 +22,7 @@ const ShowUsers = () => {
       fontSize: 14,
     },
   }));
+
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
     "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.hover,
@@ -29,8 +32,25 @@ const ShowUsers = () => {
       border: 0,
     },
   }));
-  const users = useSelector((state) => state.usersReducer.users);
-  console.log("users", users);
+
+ const users = useSelector((state) => state.usersReducer.users);
+ console.log("users", users);
+ const [rows, setRows] = useState(users);
+ const [searched, setSearched] = useState("");
+
+  const requestSearch = (searchVal) => {
+    let filteredRows = users.filter((user) => {
+          return user.email.toLowerCase().includes(searchVal.toLowerCase())})
+    setRows(filteredRows);
+    console.log('filteredRows',filteredRows);
+  };
+  console.log('rows',rows);
+
+  const cancelSearch = () => {
+    setSearched("");
+    requestSearch(searched);
+  };
+  
   return (
     <div>
       <h2>List of Users</h2>
@@ -60,24 +80,31 @@ const ShowUsers = () => {
             </tbody>
         </table> */}
       <TableContainer component={Paper}>
+      <SearchBar
+          value={searched}
+          onChange={(searchVal) => requestSearch(searchVal)}
+          onCancelSearch={() => cancelSearch()}
+        />
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Name</StyledTableCell>
               <StyledTableCell align="right">Phone</StyledTableCell>
               <StyledTableCell align="right">Email</StyledTableCell>
+              {/* <StyledTableCell align="right">Created At</StyledTableCell> */}
               <StyledTableCell align="right">More</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {users &&
-              users.map((user) => (
+            {rows &&
+              rows.map((user) => (
                 <StyledTableRow key={user.name}>
                   <StyledTableCell component="th" scope="row">
                     {user.name}
                   </StyledTableCell>
                   <StyledTableCell align="right">{user.phone}</StyledTableCell>
                   <StyledTableCell align="right">{user.email}</StyledTableCell>
+                  {/* <StyledTableCell align="right">{moment(user.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a")}</StyledTableCell>  */}
                   <StyledTableCell align="right">
                     <Button variant="outlined" href="#">
                       Info

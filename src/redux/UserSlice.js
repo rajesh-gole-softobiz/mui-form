@@ -1,9 +1,11 @@
 const {createSlice} = require("@reduxjs/toolkit")
 
+const { v4 : uuidv4 } = require("uuid");
+
 const initialUsers = {
     users : [
         {
-            id:'1',
+            id:uuidv4(),
             name:'Rajesh Gole',
             email:'rajesh.gole@softobiz.com',
             phone:'8967120236'

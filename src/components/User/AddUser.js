@@ -4,6 +4,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../redux/UserSlice";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 const AddUser = () => {
   const paperStyle = { padding: "0 15px 40px 15px", width: 250 };
@@ -11,6 +13,7 @@ const AddUser = () => {
   const phoneRegExp = /^[2-9]{2}[0-9]{8}/;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [initialValues, setIntialvalues] = useState({
     id:"",
@@ -30,7 +33,7 @@ const AddUser = () => {
 
   const onSubmit = (values) => {
     setIntialvalues(values)
-    const id = numberofUsers +1;
+    const id = uuidv4();
     const name = values.name;
     const email = values.email;
     const phone = values.phone;
@@ -38,6 +41,7 @@ const AddUser = () => {
     const user = {id, name, email, phone };
 
     dispatch(addUser(user));
+    navigate("/all-users")
   };
   console.log("initialValues", initialValues);
   return (

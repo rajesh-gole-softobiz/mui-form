@@ -35,10 +35,10 @@ export default function UserInfo() {
                     {user.name}
                   </Typography><Typography variant="body1" component="div">
                     {/* Mobile : 8967120236 */}
-                    {user.phone}
+                    { user.phone && `Mobile : ${user.phone}`}
                   </Typography><Typography variant="body1" component="div">
                     {/* Email : rajesh.gole@softobiz.com */}
-                    {user.email}
+                    {user.email && `Email : ${user.email}`}
                   </Typography></>
               ))}
       </CardContent>

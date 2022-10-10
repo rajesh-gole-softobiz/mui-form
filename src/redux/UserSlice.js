@@ -1,6 +1,8 @@
 const {createSlice} = require("@reduxjs/toolkit")
 
 const { v4 : uuidv4 } = require("uuid");
+const moment =  require("moment");
+
 
 const initialUsers = {
     users : [
@@ -8,7 +10,9 @@ const initialUsers = {
             id:uuidv4(),
             name:'Rajesh Gole',
             email:'rajesh.gole@softobiz.com',
-            phone:'8967120236'
+            phone:'8967120236',
+            createdAt: moment().format("dddd, MMMM Do YYYY, h:mm:ss a")
+
         }
     ]
 };

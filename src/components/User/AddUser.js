@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../../redux/UserSlice";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import moment from "moment";
+
 
 const AddUser = () => {
   const paperStyle = { padding: "0 15px 40px 15px", width: 250 };
@@ -20,6 +22,7 @@ const AddUser = () => {
     name: "",
     email: "",
     phone: "",
+    createdAt: "",
   });
   const validationSchema = Yup.object().shape({
     name: Yup.string().min(3, "It's too short").required("Required"),
@@ -37,8 +40,9 @@ const AddUser = () => {
     const name = values.name;
     const email = values.email;
     const phone = values.phone;
+    const createdAt = moment().format("dddd, MMMM Do YYYY, h:mm:ss a")
 
-    const user = {id, name, email, phone };
+    const user = {id, name, email, phone,createdAt };
 
     dispatch(addUser(user));
     navigate("/all-users")

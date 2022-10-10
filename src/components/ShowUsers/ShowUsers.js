@@ -42,8 +42,8 @@ const ShowUsers = () => {
 
   const requestSearch = (searchVal) => {
     let filteredRows = users.filter((user) => {
-      return user.email.toLowerCase() == searchVal.toLowerCase()})
-          // return user.email.toLowerCase().includes(searchVal.toLowerCase())})
+      // return user.email.toLowerCase() == searchVal.toLowerCase()})
+          return user.email.toLowerCase().includes(searchVal.toLowerCase())})
     setRows(filteredRows);
     console.log('filteredRows',filteredRows);
   };

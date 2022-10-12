@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
@@ -9,6 +9,8 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import moment from "moment";
+import axios from 'axios';
+
 
 const bull = (
   <Box
@@ -21,7 +23,18 @@ const bull = (
 
 export default function History() {
   const params = useParams();
-  const users = useSelector((state) => state.usersReducer.users);
+  // const users = useSelector((state) => state.usersReducer.users);
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+  axios.get('http://localhost:3008/userDetails')
+  .then((response) => {
+    const data = response.data;
+    setUsers([...users,...data])
+})
+  .catch(function (error) {
+    console.log(error);
+  });
+}, []); 
   const userDetails = users.filter((user) => {
     return user.id == params.id;
   });

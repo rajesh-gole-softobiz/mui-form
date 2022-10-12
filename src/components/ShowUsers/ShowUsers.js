@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import { useSelector } from "react-redux";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -12,6 +12,8 @@ import Button from "@mui/material/Button";
 import moment from 'moment';
 import SearchBar from '@mkyy/mui-search-bar'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 
 
 const ShowUsers = () => {
@@ -35,10 +37,24 @@ const ShowUsers = () => {
     },
   }));
 
- const users = useSelector((state) => state.usersReducer.users);
- console.log("users", users);
- const [rows, setRows] = useState(users);
+//  const users = useSelector((state) => state.usersReducer.users);
+//  console.log("users", users);
+const [users, setUsers] = useState([]);
+ 
+ const [rows, setRows] = useState([]);
  const [searched, setSearched] = useState("");
+
+ useEffect(() => {
+  axios.get('http://localhost:3008/userDetails')
+  .then((response) => {
+    const data = response.data;
+    setRows([...rows, ...data]);
+    setUsers([...users,...data])
+})
+  .catch(function (error) {
+    console.log(error);
+  });
+}, []); 
 
   const requestSearch = (searchVal) => {
     let filteredRows = users.filter((user) => {

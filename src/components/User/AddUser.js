@@ -43,6 +43,11 @@ const AddUser = () => {
     const createdAt = moment().format("dddd, MMMM Do YYYY, h:mm:ss a")
 
     const user = {id, name, email, phone,createdAt };
+    fetch('http://localhost:3008/userDetails', {
+        method: 'POST',
+        body : JSON.stringify(user),
+        headers : {'Content-Type': 'application/json', 'Accept':'application/json'}
+    })
 
     dispatch(addUser(user));
     navigate("/all-users")

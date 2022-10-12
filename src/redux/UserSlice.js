@@ -6,14 +6,14 @@ const moment =  require("moment");
 
 const initialUsers = {
     users : [
-        {
-            id:uuidv4(),
-            name:'Rajesh Gole',
-            email:'rajesh.gole@softobiz.com',
-            phone:'8967120236',
-            createdAt: moment().format("dddd, MMMM Do YYYY, h:mm:ss a")
+        // {
+        //     id:uuidv4(),
+        //     name:'Rajesh Gole',
+        //     email:'rajesh.gole@softobiz.com',
+        //     phone:'8967120236',
+        //     createdAt: moment().format("dddd, MMMM Do YYYY, h:mm:ss a")
 
-        }
+        // }
     ]
 };
 
